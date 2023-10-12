@@ -10,7 +10,7 @@
 
 ---
 
-### Recursos
+### Recursos 🐈
 
 ![Recurso 1](https://i.imgur.com/BTarBUn.png)
 ![Recurso 2](https://i.imgur.com/2jDiom0.png)
