@@ -44,6 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Muestra la fecha y el total en el footer del recibo.
         footerLeft.innerHTML = `<p>Fecha: ${todayDate}</p>`;
-        footerRight.innerHTML = `<p><i class="fa-solid fa-money-bill" style="padding-right: 10px"></i>Total: $${total}</p>`;
+        footerRight.innerHTML = `<p><i class="fa-solid fa-money-bill" style="padding-right: 10px"></i>Total: $${total.toFixed(2)}</p>`;
     }
 });
