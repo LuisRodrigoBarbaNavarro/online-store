@@ -8,9 +8,14 @@
 
 **Descripción:** Este repositorio contiene el código fuente de una tienda en línea interactiva y personalizable, construida con Bootstrap y Javascript. La tienda permite a los usuarios agregar productos de manera dinámica a su carrito de compras y generar un ticket de compra detallado al finalizar la compra.
 
-**Recursos:**
+---
+
+### Recursos
+
 ![Recurso 1](https://i.imgur.com/BTarBUn.png)
 ![Recurso 2](https://i.imgur.com/2jDiom0.png)
+
+---
 
 ### Explicación (script-index) 🐈
 
@@ -396,6 +401,8 @@ btnBuy.addEventListener("click", function () {
   }
 });
 ```
+
+---
 
 ### Preguntas 🐈
 1. `productList` (Anteriormente nombrada `catalogo`) es una variable que almacena un arreglo de objetos. En este contexto, se utiliza para contener información sobre los productos disponibles en la tienda en línea, como sus nombres, descripciones, imágenes y precios. Además, este arreglo se utiliza para generar dinámicamente las tarjetas de productos en el catálogo de la tienda.
