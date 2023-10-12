@@ -8,6 +8,10 @@
 
 **Descripción:** Este repositorio contiene el código fuente de una tienda en línea interactiva y personalizable, construida con Bootstrap y Javascript. La tienda permite a los usuarios agregar productos de manera dinámica a su carrito de compras y generar un ticket de compra detallado al finalizar la compra.
 
+**Recursos:**
+![Recurso 1](https://i.imgur.com/BTarBUn.png)
+![Recurso 2](https://i.imgur.com/2jDiom0.png)
+
 ### Explicación (script-index) 🐈
 
 Este archivo de código es parte del funcionamiento principal de la tienda en línea que permite a los usuarios agregar productos al carrito de compras y mostrar información relevante, incluyendo subtotales. A continuación se pretende mostrar el código completo y el explicación de cada uno de los métodos utilizados:
