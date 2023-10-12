@@ -199,3 +199,92 @@ btnBuy.addEventListener("click", function () {
   }
 });
 ```
+
+En esta primera parte del código, se inicia un arreglo llamado cart que se utiliza para almacenar los productos seleccionados por los usuarios, posteriormente, se define un arreglo llamado productList, que contiene información sobre los productos disponibles en la tienda, como su nombre, descripción, imagen y precio.
+```javascript
+/* Rodrigo Barba - Shinia */
+// Arreglo de productos en el cart
+const cart = [];
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Productos en el catálogo.
+  const productList = [
+    {
+      id: 1,
+      image: "https://th.bing.com/th/id/R.3e86b77bdff2526ffdb6170146d728bf?rik=5SHrQ97a2L3Hzw&pid=ImgRaw&r=0",
+      name: "Rosa Dorada (Gold Rose)",
+      description: "La Rosa Dorada es una flor exquisita con pétalos dorados y un delicado aroma a vainilla. Es una elección perfecta para ocasiones especiales. Siempre te permite obtener ganancias",
+      price: 19.99,
+    },
+    {
+      id: 2,
+      image: "https://th.bing.com/th/id/R.22fba4aff6f35c75b3f683792896cac1?rik=ASuMXgP4AFuvfw&riu=http%3a%2f%2f2.bp.blogspot.com%2f_enAvQ-J1tLQ%2fR1JMYMRVH7I%2fAAAAAAAAAFs%2fuOiaGAHDStE%2fs1600-R%2fOrchid%2b5.JPG&ehk=Sa2M8mF4wZaT7W9Y2Imm%2bCLPJYGL93IC%2bSxCor6niqk%3d&risl=&pid=ImgRaw&r=0",
+      name: "Orquídea Celestial (Heavenly Orchid)",
+      description: "La Orquídea Celestial es una flor rara y elegante con pétalos de color lavanda y un aroma suave y agradable. Es símbolo de belleza y elegancia.",
+      price: 29.99,
+    },
+    {
+      id: 3,
+      image: "https://th.bing.com/th/id/OIP.5eRfiVuzyoj4VownPMV-nAHaEo?pid=ImgDet&rs=1",
+      name: "Lirio de Plata (Silver Lily)",
+      description: "El Lirio de Plata es una flor única con pétalos plateados y un aroma fresco y limpio. Representa la pureza y la claridad. Grandes y espectaculares para la ocasión",
+      price: 24.99,
+    },
+    {
+      id: 4,
+      image: "https://th.bing.com/th/id/R.b42f616caf98f787d5ab6636671030b8?rik=gIt6ZBiOAlqq8g&riu=http%3a%2f%2f4.bp.blogspot.com%2f-_JVM0D_1cPY%2fULo-qXily7I%2fAAAAAAAAOTE%2fMYg26LsL5Ys%2fs1600%2fPurple%2bTulips%2bFlowers%2bWallpapers%2b11.jpg&ehk=WsTRIhAcap9FOGHz8WsM1X1VG8zR4BdDMdcy0ysSd7k%3d&risl=&pid=ImgRaw&r=0",
+      name: "Tulipán de Medianoche (Midnight Tulip)",
+      description: "El Tulipán de Medianoche es un tulipán de color negro profundo y misterioso. Es una opción sorprendente y elegante.",
+      price: 14.99,
+    },
+    {
+      id: 5,
+      image: "https://th.bing.com/th/id/OIP.ULKem-anJ2oDv0DcvAUVdwHaFO?pid=ImgDet&rs=1",
+      name: "Girasol Brillante (Bright Sunflower)",
+      description: "El Girasol Brillante es una flor que irradia alegría con sus pétalos amarillos vibrantes y su centro marrón cálido. Es perfecto para transmitir felicidad.",
+      price: 59.99,
+    },
+    {
+      id: 6,
+      image: "https://th.bing.com/th/id/OIP.wVCXksh8Wc6UVYi9pUSzNwHaE2?pid=ImgDet&rs=1",
+      name: "Margarita de Luna (Moon Daisy)",
+      description: "La Margarita de Luna es una flor blanca con un delicado brillo plateado en sus pétalos. Evoca la magia de una noche estrellada. Simplemente especiales para la ocasión",
+      price: 12.99,
+    },
+  ];
+```
+Después, se obtienen referencias a elementos HTML en la página, como el contenedor de la lista de productos (productListContainer), el contenedor del carrito de compras (checkoutCartContainer) y el elemento para mostrar el total de la compra (totalCheckout). Posteriormente, se crea una tarjeta para cada producto en el catálogo y se agrega al contenedor de la lista de productos. Cada tarjeta muestra información sobre el producto, incluyendo una imagen, nombre, descripción, precio y un campo para seleccionar la cantidad.
+
+```javascript
+// Obtiene el contenedor donde se mostrará el catálogo y el resumen de compra.
+  const productListContainer = document.getElementById("productList");
+  const checkoutCartContainer = document.getElementById("checkoutCart");
+  const totalCheckout = document.getElementById("totalCheckout");
+
+  // Genera las tarjetas de productos en el catálogo y las agrega al contenedor.
+  productList.forEach((product) => {
+    const card = document.createElement("div");
+    card.classList.add("col-md-4", "mb-4");
+    card.innerHTML = `
+            <div class="card card-custom neo-md rounded-md">
+                <img src="${product.image}" class="card-img-top card-img-custom" alt="Producto ${product.id}">
+                <div class="card-body">
+                    <h5 class="card-title">Producto ${product.id}</h5>
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text">Descripción: ${product.description}</p>
+                    <p class="card-text">Precio: $${product.price}</p>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="inputQuantity${product.id}">-</button>
+                        </span>
+                        <input type="text" id="inputQuantity${product.id}" class="form-control input-number" value="1" min="1" max="10">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="inputQuantity${product.id}">+</button>
+                        </span>
+                    </div>
+                    <button class="btn btn-primary add-to-cart" data-product-id="${product.id}" style="margin-top: 20px">Agregar al cart</button>
+                </div>
+            </div>
+        `;
+    productListContainer.appendChild(card);
+```
