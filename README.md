@@ -253,8 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   ];
 ```
-Después, se obtienen referencias a elementos HTML en la página, como el contenedor de la lista de productos (productListContainer), el contenedor del carrito de compras (checkoutCartContainer) y el elemento para mostrar el total de la compra (totalCheckout). Posteriormente, se crea una tarjeta para cada producto en el catálogo y se agrega al contenedor de la lista de productos. Cada tarjeta muestra información sobre el producto, incluyendo una imagen, nombre, descripción, precio y un campo para seleccionar la cantidad.
-
+Después, se obtienen referencias a elementos HTML en la página, como el contenedor de la lista de productos (productListContainer), el contenedor del carrito de compras (checkoutCartContainer) y el elemento para mostrar el total de la compra (totalCheckout). Posteriormente, se itera por cada producto dentro del arreglo de objetos y se crea una tarjeta para cada producto en el catálogo y se agrega al contenedor de la lista de productos. Cada tarjeta muestra información sobre el producto, incluyendo una imagen, nombre, descripción, precio y un campo para seleccionar la cantidad.
 ```javascript
 // Obtiene el contenedor donde se mostrará el catálogo y el resumen de compra.
   const productListContainer = document.getElementById("productList");
@@ -287,4 +286,20 @@ Después, se obtienen referencias a elementos HTML en la página, como el conten
             </div>
         `;
     productListContainer.appendChild(card);
+```
+
+Posteriormente, mediante esta función se escucha el evento de clic en el botón "Agregar al carrito" en cada tarjeta de producto. Cuando se hace clic en este botón, se obtiene la cantidad de productos a agregar y en caso de que la cantidad sea mayor a uno, se llama a la función addProduct para agregar el producto al carrito.
+```javascript
+ // Obtiene la cantidad de productos a agregar al cart y manda llamar la función para agregar el producto al cart.
+    const btnAdd = card.querySelector(".add-to-cart");
+    btnAdd.addEventListener("click", function () {
+      const quantity = parseInt(
+        document.getElementById(`inputQuantity${product.id}`).value
+      );
+
+      if (quantity > 0) {
+        addProduct(product, quantity);
+      }
+    });
+  });
 ```
