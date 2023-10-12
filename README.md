@@ -392,3 +392,12 @@ btnBuy.addEventListener("click", function () {
   }
 });
 ```
+
+### Preguntas 🐈
+1. `productList` (Anteriormente nombrada `catalogo`) es una variable que almacena un arreglo de objetos. En este contexto, se utiliza para contener información sobre los productos disponibles en la tienda en línea, como sus nombres, descripciones, imágenes y precios. Además, este arreglo se utiliza para generar dinámicamente las tarjetas de productos en el catálogo de la tienda.
+
+2. `const card = document.createElement("div")` crea un nuevo elemento HTML de tipo `<div>` y lo almacena en la variable `card`. Este elemento `<div>` se utiliza para construir una tarjeta de producto que se agregará al catálogo de la tienda en línea.
+
+3. `card.innerHTML` se utiliza para definir el contenido HTML interno del elemento `card`. En este caso, se está configurando el contenido que tendrá cada una de las tarjetas de producto y contenido dinámico, como imágenes, nombres de productos, descripciones y precios.
+
+4. `productListContainer.appendChild(card)` toma el elemento `card`, que representa una tarjeta de producto, y lo agrega como un hijo al elemento con el id `productListContainer`. En otras palabras, se inserta la tarjeta de producto dentro del contenedor del catálogo, lo que hace que la tarjeta se muestre en la página web.
