@@ -303,3 +303,92 @@ Posteriormente, mediante esta función se escucha el evento de clic en el botón
     });
   });
 ```
+
+En el siguiente código, se configuran eventos para los botones de "+" y "-" que permiten al usuario aumentar o disminuir la cantidad de productos en el carrito. Dependiendo del botón que hayamos presionado ya sea positivo o negativo, se va ir modificando los datos del campo del texto donde se muestra la cantidad total.
+```javascript
+// Eventos para incrementar y decrementar la cantidad de productos en el cart.
+  const btnNumberButtons = document.querySelectorAll(".btn-number");
+  btnNumberButtons.forEach(function (button) {
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const fieldName = this.getAttribute("data-field");
+      const type = this.getAttribute("data-type");
+      const input = document.getElementById(fieldName);
+      const currentVal = parseInt(input.value);
+
+      if (!isNaN(currentVal)) {
+        if (type === "minus") {
+          if (currentVal > input.min) {
+            input.value = currentVal - 1;
+          }
+        } else if (type === "plus") {
+          if (currentVal < input.max) {
+            input.value = currentVal + 1;
+          }
+        }
+      }
+    });
+  });
+```
+
+En este segmento de código, se detecta el evento de clic en el botón "Eliminar" dentro del carrito de compras. Cuando el botón es presionado, se procede a eliminar el producto correspondiente del carrito. Para lograr esto, se recupera el identificador único del producto y se utiliza dicho identificador para determinar el índice correspondiente en el arreglo del carrito de compra. Luego, se retira el producto de dicho carrito y, finalmente, se lleva a cabo una actualización de la lista de productos en el carrito de compra para reflejar los cambios.
+```javascript
+// Elimina un producto del carrito cuando se presiona el botón de eliminar.
+  const checkoutCart = document.getElementById("checkoutCart");
+  checkoutCart.addEventListener("click", function (e) {
+    if (e.target.classList.contains("btnDelete")) {
+      const id = e.target.parentElement.parentElement.firstElementChild
+        .textContent;
+      const index = cart.findIndex((item) => item.product.id === id);
+
+      cart.splice(index, 1);
+      updateCheckoutCart();
+    }
+  });
+```
+
+Esta función actualiza el carrito de compras mostrando los productos, cantidades, precios individuales, subtotales y el total de la compra. También se encarga de mantener la información del carrito actualizada cuando se agregan o eliminan productos. Es iterado el arreglo del carrito de compras para obtener las características de cada producto y ser desplegadas en la tabla de carrito de compra.
+```javascript
+// Actualiza el resumen de compra en el carrito cuando se agrega un producto o se cambia la cantidad de productos.
+  function updateCheckoutCart() {
+    checkoutCart.innerHTML = "";
+    let subtotal = 0;
+
+    cart.forEach((item) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+                <td>Producto ${item.product.id}</td>
+                <td>${item.product.name}</td>
+                <td>${item.quantity}</td>
+                <td>$${item.product.price}</td>
+                <td>$${item.product.price * item.quantity}</td>
+                <td><button type="button" class="btn btn-danger btnDelete">Eliminar</button></td>
+            `;
+      checkoutCart.appendChild(row);
+
+      subtotal += item.product.price * item.quantity;
+    });
+
+    totalCheckout.textContent = `$${subtotal.toFixed(2)}`;
+  }
+});
+```
+
+Mediante esta sección de código, se escucha el evento de clic en el botón "Comprar". Si hay productos en el carrito, se almacena la información del carrito en el almacenamiento local (localStorage); obteniendo la información del arreglo de carrito, y si el arreglo no se encuentra vacío se redirige al usuario a una página de recibo (receipt.html), caso contrario, se muestra una alerta para el usuario donde se indica que el carrito está vacío y no se procedió a la compra.
+```javascript
+// Botón para comprar productos y mandarlos al recibo.
+const btnBuy = document.querySelector(".btn-comprar");
+btnBuy.addEventListener("click", function () {
+  if (cart.length > 0) {
+    localStorage.removeItem("data-cart");
+
+    const cartProducts = JSON.stringify(cart);
+    localStorage.setItem("data-cart", cartProducts);
+
+    window.location.href = "receipt.html";
+  } else {
+    alert("El cart está vacío.");
+  }
+});
+```
